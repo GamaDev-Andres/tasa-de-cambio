@@ -25,3 +25,15 @@ export const getHistoricalRequest = async (date, symbol) => {
     }
   }
 }
+export const getCurrenciesRequest = async () => {
+  try {
+    const res = await axios.get(endPoints.getCurrencies())
+    return res.data
+  } catch (error) {
+    console.log(error.response.data)
+    return {
+      ok: false,
+      errors: [{ msg: error.response.data.message }],
+    }
+  }
+}
