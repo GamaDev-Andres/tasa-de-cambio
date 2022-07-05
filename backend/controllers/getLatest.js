@@ -11,6 +11,11 @@ const getLatest = async (req, res) => {
       })
     }
     const data = await getLatestRequest(symbol)
+    if (data.ok === false) {
+      return res.status(400).json({
+        ...data,
+      })
+    }
     if (!data.rates[symbol]) {
       return res.json({
         ok: false,
@@ -20,12 +25,15 @@ const getLatest = async (req, res) => {
     res.json({
       ok: true,
       data: {
-        fecha: Intl.DateTimeFormat(data.timestamp).format(),
         rates: data.rates,
       },
     })
   } catch (error) {
     console.log(error)
+    res.status(500).json({
+      ok: false,
+      errors: [{ msg: 'error en el servidor' }],
+    })
   }
 }
 export default getLatest
