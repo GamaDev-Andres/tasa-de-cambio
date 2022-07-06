@@ -1,5 +1,5 @@
 const Results = ({ result }) => {
-  const { symbol, result: resultado } = result;
+  const { symbol, result: resultado } = result
 
   return (
     <div className="bg-slate-50 w-full max-w-screen-sm my-4 mx-auto p-4 sm:rounded-2xl">
@@ -10,10 +10,10 @@ const Results = ({ result }) => {
         USD/{symbol}
       </h3>
       <span className="block w-full text-center text-sm">
-        1 USD = <strong>{resultado}</strong> {" " + symbol}
+        1 USD = <strong>{resultado}</strong> {' ' + symbol}
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default Results;
+export default Results

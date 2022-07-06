@@ -5,7 +5,7 @@ const Header = () => {
         <h1 className="font-semibold text-xl">Tasa de cambio</h1>
       </a>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,46 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   getCurrenciesRequest,
   getHistoricalRequest,
   getLatestRequest,
-} from "../services/requests";
+} from '../services/requests'
 
 const FilterBy = ({ setResult }) => {
-  const [currencies, setCurrencies] = useState({});
-  const [symbol, setSymbol] = useState("");
+  const [currencies, setCurrencies] = useState({})
+  const [symbol, setSymbol] = useState('')
   const [fecha, setFecha] = useState(
-    Intl.DateTimeFormat("fr-ca").format(Date.now())
-  );
-  const [latest, setLatest] = useState(true);
+    Intl.DateTimeFormat('fr-ca').format(Date.now())
+  )
+  const [latest, setLatest] = useState(true)
   useEffect(() => {
     async function getCurrencies() {
       try {
-        const data = await getCurrenciesRequest();
+        const data = await getCurrenciesRequest()
         if (data.ok) {
-          setCurrencies(data.data);
+          setCurrencies(data.data)
         }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
-    getCurrencies();
-  }, []);
+    getCurrencies()
+  }, [])
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const data = latest
         ? await getLatestRequest(symbol)
-        : await getHistoricalRequest(fecha, symbol);
+        : await getHistoricalRequest(fecha, symbol)
       if (data.ok) {
         setResult({
           symbol,
           result: data.data.rates[symbol],
-        });
+        })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <div className="w-full bg-slate-50 px-4 py-2">
@@ -98,7 +98,7 @@ const FilterBy = ({ setResult }) => {
           {latest && (
             <select
               className="px-2 py-1 rounded-md outline-none border border-gray-300 focus:border-gray-400 text-xs"
-              onChange={(e) => setLatest(e.target.value !== "otra")}
+              onChange={(e) => setLatest(e.target.value !== 'otra')}
             >
               <option value="actual">Actual</option>
               <option value="otra">otra</option>
@@ -110,7 +110,7 @@ const FilterBy = ({ setResult }) => {
               list="currencies"
               type="date"
               value={fecha}
-              max={Intl.DateTimeFormat("fr-ca").format(Date.now())}
+              max={Intl.DateTimeFormat('fr-ca').format(Date.now())}
               onChange={(e) => setFecha(e.target.value)}
             />
           )}
@@ -120,7 +120,7 @@ const FilterBy = ({ setResult }) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default FilterBy;
+export default FilterBy
