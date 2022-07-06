@@ -73,7 +73,7 @@ const FilterBy = ({ setResult }) => {
             maxLength={3}
             minLength={3}
             value={symbol}
-            onChange={() => setSymbol(e.target.value)}
+            onChange={(e) => setSymbol(e.target.value)}
           />
           <datalist id="currencies">
             {Object.entries(currencies).map(([key, value]) => (
@@ -98,7 +98,7 @@ const FilterBy = ({ setResult }) => {
           {latest && (
             <select
               className="px-2 py-1 rounded-md outline-none border border-gray-300 focus:border-gray-400 text-xs"
-              onChange={() => setLatest(e.target.value !== "otra")}
+              onChange={(e) => setLatest(e.target.value !== "otra")}
             >
               <option value="actual">Actual</option>
               <option value="otra">otra</option>
@@ -111,7 +111,7 @@ const FilterBy = ({ setResult }) => {
               type="date"
               value={fecha}
               max={Intl.DateTimeFormat("fr-ca").format(Date.now())}
-              onChange={() => setFecha(e.target.value)}
+              onChange={(e) => setFecha(e.target.value)}
             />
           )}
         </label>
